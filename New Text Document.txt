@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: Arial, sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            margin-top: 20px;
+        }
+        .countdown {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        .message {
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+        .surprise-btn {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.5em;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .surprise-img {
+            display: none;
+            width: 300px;
+            margin-top: 20px;
+        }
+        @keyframes confetti {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            top: 0;
+            opacity: 0.7;
+            animation: confetti 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday, Sister! 🎉🎂</h1>
+    <div class="countdown">Counting down: <span id="timer"></span></div>
+    <p class="message" id="birthdayMessage">Wishing you a day filled with love and happiness! 💖</p>
+    <button class="surprise-btn" onclick="revealSurprise()">Click for a Surprise!</button>
+    <img src="https://source.unsplash.com/300x300/?birthday" class="surprise-img" id="surpriseImg">
+    <script>
+        function countdown() {
+            const birthday = new Date('2025-03-15T00:00:00');
+            const now = new Date();
+            const diff = birthday - now;
+            if (diff <= 0) {
+                document.getElementById('timer').innerText = 'It's your special day! 🎈';
+                document.getElementById('birthdayMessage').style.opacity = 1;
+            } else {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('timer').innerText = days + ' days left!';
+            }
+        }
+        setInterval(countdown, 1000);
+        countdown();
+
+        function revealSurprise() {
+            document.getElementById('surpriseImg').style.display = 'block';
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(confetti);
+            }
+        }
+        createConfetti();
+    </script>
+</body>
+</html>
